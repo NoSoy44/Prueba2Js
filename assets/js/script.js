@@ -1,19 +1,21 @@
 //Funcion 1
 
-//Obtener elementos del Dom
-const miAlerta = document.getElementById('funka?');
-const contenedor = document.getElementById('micontenedor');
+// Función Modal para manipular los eventos
+const miVentanaEmergente = document.getElementById('ventanaEmergente')
 
+//Agregar un observador sobre el modal
 
-miAlerta.addEventListener('click', function () {
-  alert('Esto esta funcionando?');
-  const nuevoP = document.createElement('p'); 
-  nuevoP.textContent = 'Hola, este texto es nuevo :)'
+miVentanaEmergente.addEventListener('show.bs.modal', function (event) {
 
-  contenedor.appendChild(nuevoP);
-  
-  contenedor.style.backgroundColor = 'lightblue';
-});
+    //reconoces el elemento que habilita el evento modal
+    let boton = event.relatedTarget //eitiquetado relacionado al evento
+
+    let mensaje = boton.getAttribute('data-titulo')
+    let contenido = boton.getAttribute('data-contenido')
+
+    document.getElementById('tituloModal').innerText = mensaje;//Usando un id
+    document.querySelector('.modal-body').innerText = contenido;//Usando una clase
+})
 
 
 //Funcion 2
@@ -31,8 +33,8 @@ let popoverInstance = new bootstrap.Popover(miPopover);
 
 //Crear instancia
 miPopover.addEventListener('click', function () {
-  miPopover.setAttribute('data-bs-original-title', 'Nuevo titulo del Popover'); 
-  miPopover.setAttribute('data-bs-content', 'Texto interno del Popover'); 
+  miPopover.setAttribute('data-bs-original-title', 'Nuevo titulo del Popover'); // Actualizar título
+  miPopover.setAttribute('data-bs-content', 'Texto interno del Popover'); // Actualizar contenido
 
   // Destruir instancia anterior y crear una nueva
   popoverInstance.dispose();
@@ -41,9 +43,9 @@ miPopover.addEventListener('click', function () {
 
   // Alternar la visibilidad del popover
   if (miPopover.getAttribute('aria-describedby')) {
-    popoverInstance.hide(); 
+    popoverInstance.hide(); // Cerrar el popover si está visible
   } else {
-    popoverInstance.show(); 
+    popoverInstance.show(); // Mostrar el popover si no está visible
   }
 });
 
@@ -65,13 +67,13 @@ if (toastTrigger) {
 const liveToastBtn = document.getElementById('liveToastBtn');
 
 liveToastBtn.addEventListener('click', function () {
-  const toastBody = toastLiveExample.querySelector('.toast-body'); 
-  const newMessage = toastBody.getAttribute('data-titulo'); 
+  const toastBody = toastLiveExample.querySelector('.toast-body'); // Obtener cuerpo 
+  const newMessage = toastBody.getAttribute('data-titulo'); // Obtener nuevo mensaje
 
-  const toastTitle = toastLiveExample.querySelector('.me-auto');  
+  const toastTitle = toastLiveExample.querySelector('.me-auto');  // Obtener título 
   const newTitle = toastTitle.getAttribute('data-titles');
 
-  toastBody.textContent = newMessage; ; 
+  toastBody.textContent = newMessage; ; // Actualizar cuerpo
   toastTitle.textContent = newTitle; ; 
 
     // Cambiar el color de fondo del contenedor
@@ -86,14 +88,14 @@ const btnCanvas = document.getElementById('offcanvas');
 const offCanvasElement = document.getElementById('demo');
 
 btnCanvas.addEventListener('click', function () {
-    const newBodyMessage = btnCanvas.getAttribute('data-body'); 
+    const newBodyMessage = btnCanvas.getAttribute('data-body'); // Obtener nuevo mensaje del cuerpo
     const offCanvasBody = offCanvasElement.querySelector('.offcanvas-body p');
 
-    const newHeading = offCanvasElement.querySelector('.offcanvas-title').getAttribute('data-title');
-    const offTitle = offCanvasElement.querySelector('.offcanvas-title');
+    const newHeading = offCanvasElement.querySelector('.offcanvas-title').getAttribute('data-title');// Obtener nuevo título
+    const offTitle = offCanvasElement.querySelector('.offcanvas-title');// Obtener elemento del título
 
-    offCanvasBody.textContent = newBodyMessage; 
-    offTitle.textContent = newHeading; 
+    offCanvasBody.textContent = newBodyMessage; //Actualizar cuerpo
+    offTitle.textContent = newHeading; // Actualizar título
 
     // Cambiar el color de fondo del contenedor
     offCanvasElement.style.backgroundColor = 'lightblue';
